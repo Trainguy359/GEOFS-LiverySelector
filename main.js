@@ -276,4 +276,21 @@ init();
 
 let refreshMultiplayer = setInterval(function(){  
     updateMultiplayer();
-}, 5000);
+}, 5000);<!-- Assume you have a button next to each item with class "bookmark-btn" -->
+<button class="bookmark-btn" data-item-id="123">Bookmark</button>
+
+<script>
+document.querySelectorAll('.bookmark-btn').forEach(button => {
+  button.addEventListener('click', async () => {
+    const itemId = button.dataset.itemId;
+    const response = await fetch(`/api/bookmarks/${itemId}`, {
+      method: 'POST'
+    });
+    if (response.ok) {
+      alert('Item bookmarked!');
+    } else {
+      alert('Failed to bookmark item.');
+    }
+  });
+});
+</script>
